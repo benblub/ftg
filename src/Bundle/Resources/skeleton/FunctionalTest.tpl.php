@@ -36,7 +36,7 @@ final class <?= $class_name ?> extends CustomApiTestCase
 
     public function testUpdateResource()
     {
-        $this->client->request('PUT', self::ENDPOINT.'/'.$entity->getId(), [
+        $this->client->request('PUT', self::ENDPOINT.'/'.$this->entity->getId(), [
             'json' => [
             // @todo add prob to update here
             ],
@@ -48,7 +48,7 @@ final class <?= $class_name ?> extends CustomApiTestCase
 
     public function testDeleteResource()
     {
-        $this->client->request('DELETE', self::ENDPOINT.'/'.$entity->getId());
+        $this->client->request('DELETE', self::ENDPOINT.'/'.$this->entity->getId());
 
         $this->assertResponseStatusCodeSame(204);
     }
