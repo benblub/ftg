@@ -1,0 +1,2 @@
+Benblub\Ftg\Bundle\Maker\MakeFunctionalTest:
+  tags: ['maker.command']
