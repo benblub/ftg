@@ -5,14 +5,8 @@ A Functional Test Generator.
 `composer require benblub/ftg "dev-main"`
 
 ### Config Api Platform / Symfony
-There is no autoconfig yet..
 
-add to `config/bundles.php`
-```
-Benblub\Ftg\BenblubFtgBundle::class => ['dev' => true, 'test' => true],
-```
-
-add in `services.yaml`
+add to `services.yaml`
 ```
     Benblub\Ftg\Bundle\Maker\MakeFunctionalTest:
         tags: ['maker.command']
