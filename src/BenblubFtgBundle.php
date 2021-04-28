@@ -1,4 +1,5 @@
 <?php
+namespace Benblub\Ftg;
 
 class BenblubFtgBundle extends Bundle
 {
