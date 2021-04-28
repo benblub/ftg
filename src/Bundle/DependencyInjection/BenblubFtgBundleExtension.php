@@ -1,9 +1,10 @@
 <?php
 
-namespace Benblub\Ftg\DependencyInjection;
+namespace Benblub\Ftg\Bundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 class BenblubFtgExtension extends Extension
 {
