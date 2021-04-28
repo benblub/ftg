@@ -28,7 +28,7 @@ final class MakeFunctionalTest extends AbstractMaker
 
     public static function getCommandName(): string
     {
-        return 'make:ben-functional-test';
+        return 'make:ftg';
     }
 
     public function configureCommand(Command $command, InputConfiguration $inputConfig): void
@@ -84,7 +84,8 @@ final class MakeFunctionalTest extends AbstractMaker
             __DIR__.'/../Resources/skeleton/FunctionalTest.tpl.php',
             [
                 'entity' => $entity,
-                'repository' => $repository,
+                'entityShorName' => $entity->getShortName(),
+                'entityShorNameLowercase' => strtolower($entity->getShortName()) . 's',
             ]
         );
 
