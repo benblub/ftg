@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Command;
+namespace Benblub\Ftg\Bundle\Maker;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\MakerBundle\ConsoleStyle;
