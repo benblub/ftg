@@ -1,0 +1,7 @@
+{
+  "name": "benblub/ftg",
+  "description": "A Functional Test Generator for Api Platform",
+  "require": {
+    "php": ">=7.4"
+  }
+}
