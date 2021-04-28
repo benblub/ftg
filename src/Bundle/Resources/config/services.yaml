@@ -1,3 +1,2 @@
-services:
-    Benblub\Ftg\Bundle\Maker\MakeFunctionalTest:
-      tags: ['maker.command']
+Benblub\Ftg\Bundle\Maker\MakeFunctionalTest:
+    tags: ['maker.command']
