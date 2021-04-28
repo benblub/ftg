@@ -67,9 +67,9 @@ final class MakeFunctionalTest extends AbstractMaker
 
         $entity = new \ReflectionClass($class);
         $factory = $generator->createClassNameDetails(
-            $entity->getShortName(),
+            'Test' . $entity->getShortName(),
             'Tests\\Functional',
-            'Functional'
+            ''
         );
 
         $repository = new \ReflectionClass($this->managerRegistry->getRepository($entity->getName()));
