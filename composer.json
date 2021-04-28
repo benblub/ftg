@@ -8,10 +8,5 @@
   },
   "autoload": {
     "psr-4": { "Benblub\\Ftg\\": "src/" }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Benblub\\Ftg\\Tests\\": "tests/"
-    }
   }
 }
