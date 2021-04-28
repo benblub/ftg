@@ -5,7 +5,7 @@ A Functional Test Generator for Api Projects using Api-Platform
 `composer require benblub/ftg "dev-main"`
 
 ### Config Api Platform / Symfony
-There is not autoconfig yet..
+There is no autoconfig yet..
 
 add to `config/bundles.php`
 ```
