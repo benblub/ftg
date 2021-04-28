@@ -2,6 +2,7 @@
   "name": "benblub/ftg",
   "description": "A Functional Test Generator for Api Platform",
   "type": "symfony-bundle",
+  "license": "MIT",
   "require": {
     "php": ">=7.4"
   },
