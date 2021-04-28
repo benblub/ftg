@@ -6,7 +6,7 @@
 
     <services>
         <service id="Benblub\Ftg\Bundle\Maker\MakeFunctionalTest">
-            <tag name="console.command" />
+            <tag name="maker.command" />
         </service>
     </services>
 </container>
