@@ -1,5 +1,5 @@
 # ftg
-A Functional Test Generator for Api Projects using Api-Platform
+A Functional Test Generator.
 
 ### Install
 `composer require benblub/ftg "dev-main"`
