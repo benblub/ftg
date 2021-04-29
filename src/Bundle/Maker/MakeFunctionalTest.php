@@ -84,6 +84,7 @@ final class MakeFunctionalTest extends AbstractMaker
             __DIR__.'/../Resources/skeleton/FunctionalTest.tpl.php',
             [
                 'entity' => $entity,
+                'entityProperties' => $entity->getDefaultProperties(),
                 'entityShorName' => $entity->getShortName(),
                 'entityShorNameLowercase' => strtolower($entity->getShortName()) . 's',
             ]
