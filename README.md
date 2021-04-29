@@ -1,10 +1,13 @@
 # ftg
 A Functional Test Generator.
 
+### Requires
+- https://github.com/zenstruck/foundry
+
 ### Install
 `composer require benblub/ftg "dev-main"`
 
-### Config Api Platform / Symfony
+### Config Api Platform / Symfony / Foundry
 There is no autoconfig yet..
 
 add to `config/bundles.php`
@@ -16,6 +19,19 @@ add to `services.yaml`
 ```
     Benblub\Ftg\Bundle\Maker\MakeFunctionalTest:
         tags: ['maker.command']
+```
+
+Create your Foundry Classes in /tests/Factory and setup Defaults. 
+Add to your Factory myDefaults
+```php
+    public static function myDefaults(): array
+    {
+        return [
+            'email' => faker()->email,
+            'password' => faker()->password,
+            // ...
+        ];
+    }
 ```
 
 ## Use
