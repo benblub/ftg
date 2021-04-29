@@ -26,11 +26,9 @@ Add to your Factory myDefaults
 ```php
     public static function myDefaults(): array
     {
-        return [
-            'email' => faker()->email,
-            'password' => faker()->password,
-            // ...
-        ];
+        $class = new self();
+        
+        return $class->getDefaults();
     }
 ```
 
