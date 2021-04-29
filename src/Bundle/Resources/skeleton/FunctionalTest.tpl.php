@@ -2,24 +2,38 @@
 
 namespace <?= $namespace; ?>;
 
-use <?= $entity->getName() ?>;
 use App\Test\CustomApiTestCase;
+use function Zenstruck\Foundry\faker;
+use Zenstruck\Foundry\Test\Factories;
+use App\Tests\Factory\<?= $entityShorName ?>Factory;
+use Zenstruck\Foundry\Proxy;
+use App\Entity\<?= $entityShorName ?>;
+
 
 final class <?= $class_name ?> extends CustomApiTestCase
 {
-    const ENDPOINT = '<?= $entityShorNameLowercase ?>';
+    use factories;
 
-    private <?= $entityShorName ?> $entity;
+    const ENDPOINT = '/<?= $entityShorNameLowercase ?>';
+
+    /**
+     * @var <?= $entityShorName ?>|Proxy
+     */
+    private Proxy $entity;
 
     public function setUp(): void
     {
         // @todo add your setup here
-        $this->entity = new <?= $entityShorName ?>(); // @todo create some UserObject here.. eg UserFactory::createOne as examble
+        $this->client = self::createClient();
+        $this->entity = <?= $entityShorName ?>Factory::createOne();
     }
 
     public function testCreateResource()
     {
-        $this->client->request('POST', self::ENDPOINT);
+        $this->client->request('POST', self::ENDPOINT, [
+            'json' => UserFactory::myDefaults(),
+        ]);
+
 
         $this->assertResponseStatusCodeSame(201);
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
