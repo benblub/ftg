@@ -3,7 +3,6 @@
 namespace <?= $namespace; ?>;
 
 use App\Test\CustomApiTestCase;
-use function Zenstruck\Foundry\faker;
 use Zenstruck\Foundry\Test\Factories;
 use App\Tests\Factory\<?= $entityShorName ?>Factory;
 use Zenstruck\Foundry\Proxy;
