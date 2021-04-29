@@ -9,7 +9,7 @@ There is no autoconfig yet..
 
 add to `config/bundles.php`
 ```
-Benblub\Ftg\BenblubFtgBundle::class => ['dev' => true, 'test' => true],
+Benblub\Ftg\BenblubFtgBundle::class => ['dev' => true],
 ```
 
 add to `services.yaml`
