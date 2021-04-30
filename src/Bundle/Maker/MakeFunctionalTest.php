@@ -12,11 +12,12 @@ use Symfony\Bundle\MakerBundle\Maker\AbstractMaker;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Bundle\MakerBundle\MakerInterface;
 
 /**
  * @author Benjamin Knecht
  */
-final class MakeFunctionalTest extends AbstractMaker
+final class MakeFunctionalTest extends AbstractMaker implements MakerInterface
 {
     /** @var ManagerRegistry */
     private $managerRegistry;
