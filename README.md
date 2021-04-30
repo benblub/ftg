@@ -7,13 +7,7 @@ A Functional Test Generator.
 ### Install
 `composer require benblub/ftg "dev-main"`
 
-### Config Api Platform / Symfony / Foundry
-There is no autoconfig yet..
-
-add to `config/bundles.php`
-```
-Benblub\Ftg\BenblubFtgBundle::class => ['dev' => true],
-```
+### Config ApiPlatform/Symfony
 
 add to `services.yaml`
 ```
@@ -37,3 +31,9 @@ Add to your Factories myDefaults
 ## Use
 `php bin/console make:ftg`  
 `php bin/console make:ftg [<entity>]`
+
+## Help
+If Symfony autoconfig not work add to `config/bundles.php`
+```
+Benblub\Ftg\BenblubFtgBundle::class => ['dev' => true],
+```
