@@ -20,9 +20,11 @@ add to `services.yaml`
     Benblub\Ftg\Bundle\Maker\MakeFunctionalTest:
         tags: ['maker.command']
 ```
+## Foundry
+required: create your UserFactory and set defaults.
 
 Create your Foundry Classes in /tests/Factory and setup Defaults. 
-Add to your Factory myDefaults
+Add to your Factories myDefaults
 ```php
     public static function myDefaults(): array
     {
