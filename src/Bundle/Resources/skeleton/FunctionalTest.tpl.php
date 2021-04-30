@@ -47,7 +47,7 @@ final class <?= $class_name ?> extends CustomApiTestCase
 
     public function testReadResourceCollection()
     {
-        $this->client->request('GET', self::ENDPOINT);
+        $this->client->request('GET', self::ENDPOINT . '/' . $this->entity ->getId());
 
         $this->assertResponseStatusCodeSame(200);
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
