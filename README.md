@@ -1,8 +1,9 @@
 # ftg
 A Functional Test Generator.
 
-### Requires
-- https://github.com/zenstruck/foundry
+### Require
+PHP >= 7.4
+zenstruck/foundry >= 1.10 < 2
 
 ### Install
 `composer require benblub/ftg "dev-main"`
