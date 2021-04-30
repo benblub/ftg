@@ -5,7 +5,7 @@
   "license": "MIT",
   "require": {
     "php": ">=7.4",
-    "zenstruck/foundry": "^1.1"
+    "zenstruck/foundry": "^1.10"
   },
   "autoload": {
     "psr-4": { "Benblub\\Ftg\\": "src/" }
