@@ -21,7 +21,7 @@ add to `services.yaml`
         tags: ['maker.command']
 ```
 ## Foundry
-required: create your UserFactory and set defaults. `php bin/console make:factory User`
+required: create your UserFactory and set defaults. `php bin/console make:factory User --test`
 
 Create your Foundry Classes in /tests/Factory and setup Defaults. 
 Add to your Factories myDefaults
