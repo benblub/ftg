@@ -5,6 +5,8 @@
   "license": "MIT",
   "require": {
     "php": ">=7.4",
+  },
+  "require-dev": {
     "zenstruck/foundry": "^1.10"
   },
   "autoload": {
