@@ -22,7 +22,7 @@ final class <?= $class_name ?> extends CustomApiTestCase
 
     public function setUp(): void
     {
-        self::parent();
+        parent::setUp();
 
         // We set a Bearer Token to all our requests in this class from the created User
         $user = UserFactory::createOne(['roles' => '<?= $role ?>']);
