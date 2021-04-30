@@ -36,6 +36,7 @@ final class MakeFunctionalTest extends AbstractMaker
         $command
             ->setDescription('Creates a Functional Test for a Resource')
             ->addArgument('entity', InputArgument::OPTIONAL, 'Entity class to create a FunctionalTest for')
+            ->addArgument('role', InputArgument::OPTIONAL, 'role for the auth User eg user, admin or whatever')
         ;
 
         $inputConfig->setArgumentAsNonInteractive('entity');
@@ -65,11 +66,14 @@ final class MakeFunctionalTest extends AbstractMaker
             throw new RuntimeCommandException(\sprintf('Entity "%s" not found.', $input->getArgument('entity')));
         }
 
+        $role = $this->getRole($input->getArgument('role'));
+        $getRoleAsName = $this->getRoleAsName($input->getArgument('role'));
+
         $entity = new \ReflectionClass($class);
         $factory = $generator->createClassNameDetails(
             $entity->getShortName(),
             'Tests\\Functional',
-            'Test'
+            $getRoleAsName . 'Test'
         );
 
         $repository = new \ReflectionClass($this->managerRegistry->getRepository($entity->getName()));
@@ -87,6 +91,7 @@ final class MakeFunctionalTest extends AbstractMaker
                 'entityProperties' => $entity->getDefaultProperties(),
                 'entityShorName' => $entity->getShortName(),
                 'entityShorNameLowercase' => strtolower($entity->getShortName()) . 's',
+                'role' => $role,
             ]
         );
 
@@ -98,6 +103,24 @@ final class MakeFunctionalTest extends AbstractMaker
             'Next: Open your new FunctionalTest and finish it.',
             'Find the documentation at https://github.com/benblub/ftg',
         ]);
+    }
+
+    public function getRole(string $role)
+    {
+        if ($role) {
+            return 'ROLE_' . strtoupper($role);
+        }
+
+        return 'ROLE_USER';
+    }
+
+    public function getRoleAsName(string $role)
+    {
+        if ($role) {
+            return 'As' . ucfirst($role);
+        }
+
+        return 'AsUser';
     }
 
     public function configureDependencies(DependencyBuilder $dependencies): void

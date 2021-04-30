@@ -22,8 +22,14 @@ final class <?= $class_name ?> extends CustomApiTestCase
 
     public function setUp(): void
     {
-        // @todo add your setup here
-        $this->client = self::createClient();
+        self::parent();
+
+        // We set a Bearer Token to all our requests in this class from the created User
+        $user = UserFactory::createOne(['roles' => <?= $role ?>]);
+        $this->setAuthenticationHeader($user->getId());
+
+        // This sets you a entity Objects which have the defaults from your Factory
+        // Set all your require fields in defaults
         $this->entity = <?= $entityShorName ?>Factory::createOne();
     }
 
