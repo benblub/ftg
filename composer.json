@@ -3,6 +3,11 @@
   "description": "A Functional Test Generator for Api Platform",
   "type": "symfony-bundle",
   "license": "MIT",
+  "authors": [
+    {
+      "name": "Benjamin Knecht"
+    }
+  ],
   "require": {
     "php": ">=7.4",
   },
