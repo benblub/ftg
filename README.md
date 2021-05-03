@@ -21,9 +21,11 @@ add to `services.yaml`
         tags: ['maker.command']
 ```
 ## Foundry
-required: create your UserFactory and set defaults. `php bin/console make:factory User --test`
 
-Create your Foundry Classes in /tests/Factory and setup Defaults. 
+This Generator make use of Foundry Factories. For every Testclass we generate we need to have a Factory too. 
+Create your Factory `php bin/console make:factory User --test` and set defaults. The defaults are at least all required fields from your Entity. 
+
+add this Method to your Factories
 Add to your Factories myDefaults
 ```php
     public static function myDefaults(): array
