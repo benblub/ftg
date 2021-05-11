@@ -63,4 +63,11 @@ final class <?= $class_name ?> extends CustomApiTestCase
 
         $this->assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
     }
+
+    public function testDenyReadResourceCollection()
+    {
+        $this->client->request('GET', self::ENDPOINT);
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
+    }
 }
