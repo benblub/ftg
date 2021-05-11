@@ -40,6 +40,7 @@ final class MakeFunctionalTest extends AbstractMaker implements MakerInterface
             ->addArgument('entity', InputArgument::OPTIONAL, 'Entity class to create a FunctionalTest for')
             ->addArgument('role', InputArgument::OPTIONAL, 'role for the auth User eg user, admin or whatever')
             ->addOption('deny', 'd', InputOption::VALUE_OPTIONAL, 'Test Deny CRUD for Role xy')
+            ->addOption('other', 'o', InputOption::VALUE_OPTIONAL, 'Test Deny CRUD for other user')
         ;
 
         $inputConfig->setArgumentAsNonInteractive('entity');
@@ -72,6 +73,7 @@ final class MakeFunctionalTest extends AbstractMaker implements MakerInterface
         $role = $this->getRole($input->getArgument('role'));
         $getRoleAsName = $this->getRoleAsName($input->getArgument('role'));
         $deny = $input->getOption('deny');
+        $other = $input->getOption('other');
 
         if ($deny === 'deny') {
             $getRoleAsName = 'Deny' . $getRoleAsName;
@@ -81,7 +83,7 @@ final class MakeFunctionalTest extends AbstractMaker implements MakerInterface
         $factory = $generator->createClassNameDetails(
             $entity->getShortName(),
             'Tests\\Functional',
-            $getRoleAsName . 'Test'
+            $getRoleAsName . $other . 'Test'
         );
 
         $repository = new \ReflectionClass($this->managerRegistry->getRepository($entity->getName()));
@@ -156,9 +158,11 @@ final class MakeFunctionalTest extends AbstractMaker implements MakerInterface
      * 1. With a given ROLE there isset a Bearer Token to all Request
      * 2. As Anymous there is no auth and the Function names differ
      */
-    private function loadTemplate(string $deny)
+    private function loadTemplate(string $deny, string $other)
     {
-        if ($deny === 'deny') {
+        if ($deny === 'deny' && $other === 'Other') {
+            return 'DenyAsRoleOtherTest.tpl.php';
+        } elseif ($deny === 'deny') {
             return 'DenyFunctionalTest.tpl.php';
         }
 

@@ -96,7 +96,8 @@ class AuthHelper extends ApiTestCase implements AuthHelperInterface
 
 ## Use
 Allow CRUD Test `php bin/console make:ftg`  
-Deny CRUD Test `php bin/console make:ftg --deny=deny`  
+Deny CRUD as anymous Test `php bin/console make:ftg --deny=deny`  
+Deny CRUD as %role% for other User `php bin/console make:ftg --deny=deny --other=Other`
 
 interactive Questions  
 **Question: role for the auth User eg user, admin or whatever**  
