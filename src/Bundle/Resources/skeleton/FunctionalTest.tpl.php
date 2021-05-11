@@ -72,4 +72,12 @@ final class <?= $class_name ?> extends CustomApiTestCase
 
         $this->assertResponseStatusCodeSame(Response::HTTP_NO_CONTENT);
     }
+
+    public function testReadResourceCollection()
+    {
+        $this->client->request('GET', self::ENDPOINT);
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+    }
 }
