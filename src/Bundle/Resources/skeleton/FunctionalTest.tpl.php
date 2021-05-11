@@ -26,6 +26,8 @@ final class <?= $class_name ?> extends CustomApiTestCase
         parent::setUp();
 
         // We set a Bearer Token to all our requests in this class from the created User
+        // for Entity User delete next line and move setAuthenticationHeader to Line 36 and replace $user->getId()
+        // with $this->entity->getId()
         $user = UserFactory::createOne(['roles' => ['<?= $role ?>']]);
         $this->setAuthenticationHeader($user->getId());
 
