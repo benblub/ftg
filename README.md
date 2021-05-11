@@ -1,14 +1,19 @@
 # ftg
 A Functional Test Generator.
 
-### Require
-PHP >= 7.4
-zenstruck/foundry >= 1.10 < 2
+### Requires
+- https://github.com/zenstruck/foundry
 
 ### Install
 `composer require benblub/ftg "dev-main"`
 
-### Config ApiPlatform/Symfony
+### Config Api Platform / Symfony / Foundry
+There is no autoconfig yet..
+
+add to `config/bundles.php`
+```
+Benblub\Ftg\BenblubFtgBundle::class => ['dev' => true],
+```
 
 add to `services.yaml`
 ```
@@ -16,10 +21,11 @@ add to `services.yaml`
         tags: ['maker.command']
 ```
 ## Foundry
-required: create your UserFactory and set defaults. `php bin/console make:factory User --test`
 
-Create your Foundry Classes in /tests/Factory and setup Defaults. 
-Add to your Factories myDefaults
+This Generator make use of Foundry Factories. For every Testclass we generate we need to have a Factory too. 
+Create your Factory `php bin/console make:factory User --test` and set defaults. The defaults are at least all required fields from your Entity. 
+
+Add Method myDefaults to your Factories
 ```php
     public static function myDefaults(): array
     {
@@ -29,12 +35,67 @@ Add to your Factories myDefaults
     }
 ```
 
+## Extends ApiTestCase
+
+In our Cases the Api requests need some Authentication. A a helper Class for Auth like shown here. 
+The generate Tests set then auth. Currently there is no Option for disable auth on generated test xy..
+
+```php
+<?php
+
+namespace App\Test;
+
+use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\Client;
+
+class CustomApiTestCase extends ApiTestCase
+{
+    protected Client $client;
+
+    public function setUp(): void
+    {
+        $this->client = self::createClient();
+    }
+
+    /**
+     * Set here whatever your config is from lexik_jwt_authentication.yaml <user_identity_field>
+     * user_identity_field: email|username|id (your Provider must support it eg loadUserBy..)
+     *
+     * After Create a User in a test call this Method and make requests with this User authenticated
+     */
+    protected function setAuthenticationHeader(string $id)
+    {
+        $token = $this->getUserToken($this->client, $id);
+        $this->client->setDefaultOptions([
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+            ],
+        ]);
+    }
+
+    /**
+     * Generate our Bearer Token
+     */
+    protected function getUserToken(Client $client, string $id): string
+    {
+        $data = ['id' => $id];
+
+        return $client
+            ->getContainer()
+            ->get('lexik_jwt_authentication.encoder')
+            ->encode($data);
+    }
+}
+```
+
+
 ## Use
 `php bin/console make:ftg`  
 `php bin/console make:ftg [<entity>]`
 
-## Help
-If Symfony autoconfig not work add to `config/bundles.php`
-```
-Benblub\Ftg\BenblubFtgBundle::class => ['dev' => true],
-```
+## Why this Bundle
+Create Functional CRUD tests is mostly same for all Entities and over different Projetcs. With use of a Generator there are various Benefits.
+- Tests looks same
+- no boring write of always same code
+- speedup writing tests and focus on tests which test the individual App parts
+- Easy way to Replace tests if new Version/improvements available
