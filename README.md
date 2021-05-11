@@ -90,9 +90,16 @@ class CustomApiTestCase extends ApiTestCase
 
 
 ## Use
-allow CRUD Test `php bin/console make:ftg`  
+Allow CRUD Test `php bin/console make:ftg`  
 Deny CRUD Test `php bin/console make:ftg --deny=deny`  
 
+interactive Questions
+Question: role for the auth User eg user, admin or whatever  
+Type with which ROLE this test should be created. user for ROLE_USER, admin for ROLE_ADMIN or all other roles. 
+any means not auth header will be set.
+
+Question Entity class to create a FunctionalTest for  
+chose the entity which you want test
 
 ## Why this Bundle
 Create Functional CRUD tests is mostly same for all Entities and over different Projetcs. With use of a Generator there are various Benefits.
