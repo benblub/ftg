@@ -71,8 +71,9 @@ final class MakeFunctionalTest extends AbstractMaker implements MakerInterface
 
         $role = $this->getRole($input->getArgument('role'));
         $getRoleAsName = $this->getRoleAsName($input->getArgument('role'));
+        $deny = $input->getOption('deny');
 
-        if ($role === 'any') {
+        if ($deny === 'deny') {
             $getRoleAsName = 'Deny' . $getRoleAsName;
         }
 
@@ -92,7 +93,7 @@ final class MakeFunctionalTest extends AbstractMaker implements MakerInterface
 
         $generator->generateClass(
             $factory->getFullName(),
-            __DIR__.'/../Resources/skeleton/' . $this->loadTemplate($role),
+            __DIR__.'/../Resources/skeleton/' . $this->loadTemplate($deny),
             [
                 'entity' => $entity,
                 'entityProperties' => $entity->getDefaultProperties(),
@@ -155,9 +156,9 @@ final class MakeFunctionalTest extends AbstractMaker implements MakerInterface
      * 1. With a given ROLE there isset a Bearer Token to all Request
      * 2. As Anymous there is no auth and the Function names differ
      */
-    private function loadTemplate(string $role)
+    private function loadTemplate(string $deny)
     {
-        if ($role === 'any') {
+        if ($deny === 'deny') {
             return 'DenyFunctionalTest.tpl.php';
         }
 

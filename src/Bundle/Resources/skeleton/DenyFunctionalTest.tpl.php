@@ -3,10 +3,11 @@
 namespace <?= $namespace; ?>;
 
 use App\Test\CustomApiTestCase;
-use Zenstruck\Foundry\Test\Factories;
-use App\Tests\Factory\<?= $entityShorName ?>Factory;
-use Zenstruck\Foundry\Proxy;
 use App\Entity\<?= $entityShorName ?>;
+use App\Tests\Factory\<?= $entityShorName ?>Factory;
+use Symfony\Component\HttpFoundation\Response;
+use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Proxy;
 
 
 final class <?= $class_name ?> extends CustomApiTestCase
@@ -35,7 +36,7 @@ final class <?= $class_name ?> extends CustomApiTestCase
             'json' => UserFactory::myDefaults(),
         ]);
 
-        $this->assertResponseStatusCodeSame(201);
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
     }
 
@@ -43,7 +44,7 @@ final class <?= $class_name ?> extends CustomApiTestCase
     {
         $this->client->request('GET', self::ENDPOINT . '/' . $this->entity ->getId());
 
-        $this->assertResponseStatusCodeSame(200);
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
     }
 
@@ -55,7 +56,7 @@ final class <?= $class_name ?> extends CustomApiTestCase
             ],
         ]);
 
-        $this->assertResponseStatusCodeSame(200);
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
     }
 
@@ -63,6 +64,6 @@ final class <?= $class_name ?> extends CustomApiTestCase
     {
         $this->client->request('DELETE', self::ENDPOINT.'/'.$this->entity->getId());
 
-        $this->assertResponseStatusCodeSame(204);
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
     }
 }
