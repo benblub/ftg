@@ -75,6 +75,8 @@ final class <?= $class_name ?> extends CustomApiTestCase
 
     public function testReadResourceCollection()
     {
+        // TODO we need to create some Resources and assert (we have 1 Resource allready in setup)
+
         $this->client->request('GET', self::ENDPOINT);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
