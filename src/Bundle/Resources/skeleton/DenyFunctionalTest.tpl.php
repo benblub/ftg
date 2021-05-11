@@ -48,11 +48,7 @@ final class <?= $class_name ?> extends CustomApiTestCase
 
     public function testDenyUpdateResource()
     {
-        $this->client->request('PUT', self::ENDPOINT.'/'.$this->entity->getId(), [
-            'json' => [
-            // @todo add prob to update here
-            ],
-        ]);
+        $this->client->request('PUT', self::ENDPOINT.'/'.$this->entity->getId());
 
         $this->assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
     }
