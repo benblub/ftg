@@ -24,28 +24,22 @@ final class <?= $class_name ?> extends CustomApiTestCase
     {
         parent::setUp();
 
-        // We set a Bearer Token to all our requests in this class from the created User
-        $user = UserFactory::createOne(['roles' => ['<?= $role ?>']]);
-        $this->setAuthenticationHeader($user->getId());
-
         // This sets you a entity Objects which have the defaults from your Factory
         // Set all your require fields in defaults
         $this->entity = <?= $entityShorName ?>Factory::createOne();
     }
 
-    public function testCreateResource()
+    public function testDenyCreateResource()
     {
         $this->client->request('POST', self::ENDPOINT, [
             'json' => UserFactory::myDefaults(),
         ]);
 
-
         $this->assertResponseStatusCodeSame(201);
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
-        // @todo add snapshots code here ;) ?
     }
 
-    public function testReadResource()
+    public function testDenyReadResource()
     {
         $this->client->request('GET', self::ENDPOINT . '/' . $this->entity ->getId());
 
@@ -53,7 +47,7 @@ final class <?= $class_name ?> extends CustomApiTestCase
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
     }
 
-    public function testUpdateResource()
+    public function testDenyUpdateResource()
     {
         $this->client->request('PUT', self::ENDPOINT.'/'.$this->entity->getId(), [
             'json' => [
@@ -65,7 +59,7 @@ final class <?= $class_name ?> extends CustomApiTestCase
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
     }
 
-    public function testDeleteResource()
+    public function testDenyDeleteResource()
     {
         $this->client->request('DELETE', self::ENDPOINT.'/'.$this->entity->getId());
 

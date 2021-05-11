@@ -13,6 +13,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Bundle\MakerBundle\MakerInterface;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
  * @author Benjamin Knecht
@@ -38,6 +39,7 @@ final class MakeFunctionalTest extends AbstractMaker implements MakerInterface
             ->setDescription('Creates a Functional Test for a Resource')
             ->addArgument('entity', InputArgument::OPTIONAL, 'Entity class to create a FunctionalTest for')
             ->addArgument('role', InputArgument::OPTIONAL, 'role for the auth User eg user, admin or whatever')
+            ->addOption('deny', 'd', InputOption::VALUE_OPTIONAL, 'Test Deny CRUD for Role xy')
         ;
 
         $inputConfig->setArgumentAsNonInteractive('entity');
@@ -70,6 +72,10 @@ final class MakeFunctionalTest extends AbstractMaker implements MakerInterface
         $role = $this->getRole($input->getArgument('role'));
         $getRoleAsName = $this->getRoleAsName($input->getArgument('role'));
 
+        if ($role === 'any') {
+            $getRoleAsName = 'Deny' . $getRoleAsName;
+        }
+
         $entity = new \ReflectionClass($class);
         $factory = $generator->createClassNameDetails(
             $entity->getShortName(),
@@ -86,7 +92,7 @@ final class MakeFunctionalTest extends AbstractMaker implements MakerInterface
 
         $generator->generateClass(
             $factory->getFullName(),
-            __DIR__.'/../Resources/skeleton/FunctionalTest.tpl.php',
+            __DIR__.'/../Resources/skeleton/' . $this->loadTemplate($role),
             [
                 'entity' => $entity,
                 'entityProperties' => $entity->getDefaultProperties(),
@@ -142,5 +148,19 @@ final class MakeFunctionalTest extends AbstractMaker implements MakerInterface
         \sort($choices);
 
         return $choices;
+    }
+
+    /**
+     * Currently there are 2 Template
+     * 1. With a given ROLE there isset a Bearer Token to all Request
+     * 2. As Anymous there is no auth and the Function names differ
+     */
+    private function loadTemplate(string $role)
+    {
+        if ($role === 'any') {
+            return 'DenyFunctionalTest.tpl.php';
+        }
+
+        return 'FunctionalTest.tpl.php';
     }
 }
