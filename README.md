@@ -90,8 +90,9 @@ class CustomApiTestCase extends ApiTestCase
 
 
 ## Use
-`php bin/console make:ftg`  
-`php bin/console make:ftg [<entity>]`
+allow CRUD Test `php bin/console make:ftg`  
+Deny CRUD Test `php bin/console make:ftg --deny=deny`  
+
 
 ## Why this Bundle
 Create Functional CRUD tests is mostly same for all Entities and over different Projetcs. With use of a Generator there are various Benefits.
