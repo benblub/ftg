@@ -37,7 +37,6 @@ final class <?= $class_name ?> extends CustomApiTestCase
         ]);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
-        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
     }
 
     public function testDenyReadResource()
@@ -45,7 +44,6 @@ final class <?= $class_name ?> extends CustomApiTestCase
         $this->client->request('GET', self::ENDPOINT . '/' . $this->entity ->getId());
 
         $this->assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
-        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
     }
 
     public function testDenyUpdateResource()
@@ -57,7 +55,6 @@ final class <?= $class_name ?> extends CustomApiTestCase
         ]);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_UNAUTHORIZED);
-        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
     }
 
     public function testDenyDeleteResource()
