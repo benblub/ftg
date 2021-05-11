@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Test;
+namespace Benblub\Ftg\Bundle\Helper;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\Client;
 
-class CustomApiTestCase extends ApiTestCase
+class AuthHelper extends ApiTestCase implements AuthHelperInterface
 {
     protected Client $client;
 
@@ -20,7 +20,7 @@ class CustomApiTestCase extends ApiTestCase
      *
      * After Create a User in a test call this Method and make requests with this User authenticated
      */
-    protected function setAuthenticationHeader(string $id)
+    public function setAuthenticationHeader(string $id)
     {
         $token = $this->getUserToken($this->client, $id);
         $this->client->setDefaultOptions([
@@ -33,7 +33,7 @@ class CustomApiTestCase extends ApiTestCase
     /**
      * Generate our Bearer Token
      */
-    protected function getUserToken(Client $client, string $id): string
+    public function getUserToken(Client $client, string $id): string
     {
         $data = ['id' => $id];
 

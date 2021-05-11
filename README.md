@@ -35,10 +35,14 @@ Add Method myDefaults to your Factories
     }
 ```
 
-## Extends ApiTestCase
+## Extends ApiTestCase / implement AuthHelperInterface
 
-In our Cases the Api requests need some Authentication. A a helper Class for Auth like shown here. 
-The generate Tests set then auth. Currently there is no Option for disable auth on generated test xy..
+Your Test classes extend any class which extends ApiTestCase from ApiPlatform. 
+To use Auth you need to implement the AuthHelperInterface like shown in the examble.
+also needs config set "custom_auth: true" (config is not implemented yet)
+
+else you can use the defaults from AuthHelper (use id as identifier)
+
 
 ```php
 <?php
@@ -48,7 +52,8 @@ namespace App\Test;
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\Client;
 
-class CustomApiTestCase extends ApiTestCase
+
+class AuthHelper extends ApiTestCase implements AuthHelperInterface
 {
     protected Client $client;
 
@@ -63,7 +68,7 @@ class CustomApiTestCase extends ApiTestCase
      *
      * After Create a User in a test call this Method and make requests with this User authenticated
      */
-    protected function setAuthenticationHeader(string $id)
+    public function setAuthenticationHeader(string $id)
     {
         $token = $this->getUserToken($this->client, $id);
         $this->client->setDefaultOptions([
@@ -76,7 +81,7 @@ class CustomApiTestCase extends ApiTestCase
     /**
      * Generate our Bearer Token
      */
-    protected function getUserToken(Client $client, string $id): string
+    public function getUserToken(Client $client, string $id): string
     {
         $data = ['id' => $id];
 

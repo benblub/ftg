@@ -3,14 +3,14 @@
 namespace <?= $namespace; ?>;
 
 use App\Entity\<?= $entityShorName ?>;
-use App\Test\CustomApiTestCase;
+use Benblub\Ftg\Bundle\Helper\AuthHelper;
 use App\Tests\Factory\<?= $entityShorName ?>Factory;
 use Symfony\Component\HttpFoundation\Response;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
 
 
-final class <?= $class_name ?> extends CustomApiTestCase
+final class <?= $class_name ?> extends AuthHelper
 {
     use factories;
 
