@@ -31,7 +31,8 @@ final class <?= $class_name ?> extends AuthHelper
         parent::setUp();
 
         $user = UserFactory::createOne();
-        $this->setAuthenticationHeader($user->getId());
+        $this->setIdentifier(['id' => $user->getId()]); // TODO this should come from config!
+        $this->setAuthenticationHeader();
 
         // This sets you a entity Objects which have the defaults from your Factory
         // Set all your require fields in defaults

@@ -7,7 +7,7 @@ use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\Client;
 
 interface AuthHelperInterface
 {
-    public function setUp();
-    public function setAuthenticationHeader(string $id);
-    public function getUserToken(Client $client, string $id);
+    public function setIdentifier(array $identifier);
+    public function setAuthenticationHeader();
+    public function getUserToken(Client $client, string $identifier);
 }

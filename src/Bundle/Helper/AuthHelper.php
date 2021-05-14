@@ -8,10 +8,16 @@ use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\Client;
 class AuthHelper extends ApiTestCase implements AuthHelperInterface
 {
     protected Client $client;
+    protected array $identifier; // can be id, email or whatever is used as identifier
 
     public function setUp(): void
     {
         $this->client = self::createClient();
+    }
+
+    public function setIdentifier(array $identifier)
+    {
+        $this->identifier = $identifier;
     }
 
     /**
@@ -20,9 +26,10 @@ class AuthHelper extends ApiTestCase implements AuthHelperInterface
      *
      * After Create a User in a test call this Method and make requests with this User authenticated
      */
-    public function setAuthenticationHeader(string $id)
+    public function setAuthenticationHeader()
     {
-        $token = $this->getUserToken($this->client, $id);
+        $arrayKey = array_key_first($this->identifier);
+        $token = $this->getUserToken($this->client, $this->identifier[$arrayKey]);
         $this->client->setDefaultOptions([
             'headers' => [
                 'Authorization' => 'Bearer ' . $token,
@@ -33,9 +40,9 @@ class AuthHelper extends ApiTestCase implements AuthHelperInterface
     /**
      * Generate our Bearer Token
      */
-    public function getUserToken(Client $client, string $id): string
+    public function getUserToken(Client $client, string $identifier): string
     {
-        $data = ['id' => $id];
+        $data = $this->identifier;
 
         return $client
             ->getContainer()
