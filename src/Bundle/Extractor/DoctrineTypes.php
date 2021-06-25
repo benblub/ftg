@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Benblub\Ftg\Bundle\Extractor;
+namespace Benblub\FtgBundle\Extractor;
 
 
 class DoctrineTypes
